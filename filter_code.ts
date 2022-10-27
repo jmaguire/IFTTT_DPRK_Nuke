@@ -47,7 +47,6 @@ const compassRegex = /(?<=&deg;)\w/g;
 // Variables to text
 let magnitude = parseRegexFloat(title, magRegex); // In Mb
 let depth = parseRegexFloat(content, depthRegex); // In km
-let inNorthKorea = title.toLowerCase().indexOf('north korea') !== -1;
 let latLongMatch = content.match(latLongRegex);
 let compassMatch = content.match(compassRegex);
 
@@ -65,7 +64,7 @@ if (latLongMatch && latLongMatch[0] && latLongMatch[1]) {
 
 let dist = !isNaN(lat2) && !isNaN(lon2) ? distance(lat2, lon2) : 1000000000;
 
-if (magnitude && depth && dist && depth < 20 && dist < 50 && inNorthKorea) {
+if (magnitude && depth && dist && depth < 20 && dist < 50) {
   // 0.000205174 e^(2.27416 m)
   let calc = Math.round(0.000205174 * Math.E ** (2.27416 * magnitude));
   let message =
@@ -76,8 +75,6 @@ if (magnitude && depth && dist && depth < 20 && dist < 50 && inNorthKorea) {
     magnitude +
     '\ndepth: ' +
     depth +
-    '\ninNorthKorea: ' +
-    inNorthKorea +
     '\nDistance ' +
     dist +
     'km';
