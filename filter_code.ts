@@ -23,7 +23,7 @@ let distance = function (lat2: number, lon2: number) {
     dist = (dist * 180) / Math.PI;
     dist = dist * 60 * 1.1515;
     dist = dist * 1.609344;
-    return dist;
+    return Math.round(dist);
   }
 };
 
@@ -69,7 +69,7 @@ if (magnitude && depth && dist && depth < 20 && dist < 50 && inNorthKorea) {
   // 0.000205174 e^(2.27416 m)
   let calc = Math.round(0.000205174 * Math.E ** (2.27416 * magnitude));
   let message =
-    'Test Alert' +
+    'ALERT' +
     '\nyield: ' +
     calc +
     '\nmagnitude: ' +
